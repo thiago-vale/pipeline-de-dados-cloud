@@ -3,8 +3,8 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 import os
 
-caminho1 = "/home/thiago-vale/Documentos/GitHub/pipeline-de-dados-cloud/shared_dir/pipeline/raw_to_trusted.py"
-#caminho2 = "/home/thiago-vale/Documentos/GitHub/pipeline-de-dados-cloud/shared_dir/pipeline/trusted_to_refined"
+caminho1 = "/root/shared_dir/pipeline/raw_to_trusted.py"
+#caminho2 = "/root/shared_dir/pipeline/trusted_to_refined"
 # Função que será chamada pelo PythonOperator
 
 def run_script(file):
@@ -14,16 +14,17 @@ def run_script(file):
 # Definir os argumentos da DAG
 default_args = {
     'owner': 'airflow',
-    'start_date': '',
+    'start_date': datetime(2023, 1, 1),
     'retries': 1,
-    'retry_delay':'@once',
+    'retry_delay': timedelta(minutes=5),
+    'catchup': False,
 }
 
 # Criar a DAG
 dag = DAG(
     'run_pipeline',
     default_args=default_args,
-    schedule_interval='@daily',
+    schedule_interval='@daily'
 )
 
 # Criar o operador PythonOperator
@@ -32,6 +33,7 @@ raw_to_trusted_task = PythonOperator(
     python_callable=run_script,
     op_args=caminho1,
     dag=dag,
+    owner="thiago"
 )
 
 # Definir a ordem dos operadores

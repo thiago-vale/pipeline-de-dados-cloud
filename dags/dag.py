@@ -16,13 +16,15 @@ with DAG(
     task_source_to_raw = PythonOperator(
         task_id="execute_source_to_raw",
         python_callable=execute_python_file,
-        op_kwargs={"file_path": "/home/thiago-vale/Documentos/GitHub/pipeline-de-dados-cloud/shared_dir/pipeline/source_to_raw.py"}
+        op_kwargs={"file_path": "/root/shared_dir/pipeline/source_to_raw.py"},
+        owner="thiago"
     )
 
     task_raw_to_trusted = PythonOperator(
         task_id="execute_raw_to_trusted",
         python_callable=execute_python_file,
-        op_kwargs={"file_path": "/home/thiago-vale/Documentos/GitHub/pipeline-de-dados-cloud/shared_dir/pipeline/raw_to_trusted.py"}
+        op_kwargs={"file_path": "/root/shared_dir/pipeline/raw_to_trusted.py"},
+        owner="thiago"
     )
 
 task_source_to_raw >> task_raw_to_trusted
