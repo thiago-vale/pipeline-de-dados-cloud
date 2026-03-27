@@ -15,4 +15,3 @@ awswrangler==2.14.0
 beautifulsoup4==4.11.1
 bs4==0.0.1
 pyathena==2.14.0
-pandas==1.4.0
