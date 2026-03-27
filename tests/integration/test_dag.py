@@ -6,16 +6,16 @@ def test_dag_loaded():
 
     assert len(dag_bag.import_errors) == 0, f"Erros: {dag_bag.import_errors}"
 
-    dag = dag_bag.get_dag(dag_id="primeira_dag")
+    dag = dag_bag.get_dag(dag_id="hello_world")
 
     assert dag is not None
-    assert dag.dag_id == "primeira_dag"
+    assert dag.dag_id == "hello_world"
 
 
 def test_dag_tasks():
     dag_bag = DagBag(dag_folder="dags/", include_examples=False)
 
-    dag = dag_bag.get_dag("primeira_dag")
+    dag = dag_bag.get_dag("hello_world")
 
     assert dag is not None  # 👈 importante
 
