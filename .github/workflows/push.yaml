@@ -28,6 +28,10 @@ jobs:
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
 
+      - name: Init Airflow DB
+        run: |
+          airflow db init
+
       - name: Run unit and integration tests
         run: |
           PYTHONPATH=$(pwd) pytest tests/
