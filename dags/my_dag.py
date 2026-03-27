@@ -29,5 +29,5 @@ with DAG(
         owner="thiago"
     )
 
-    task_hello >> [task_ola,task_oi]
+    task_hello >> task_ola  >> task_oi
 
